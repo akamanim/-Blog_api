@@ -44,15 +44,32 @@ class Post(models.Model):
 
 
     def __str__(self):
-        return f'{self.author.username } -> {self.title}'
+        return f'{self.author.name } -> {self.title}'
 
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
     body = models.TextField()
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Comment from {self.author.username}  to  {self.post.title}'
+        return f'Comment from {self.author.name}  to  {self.post.title}'
+    
 
+class Rating(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ratings')
+    rating = models.PositiveSmallIntegerField()
+    post = models.ForeignKey(Post,on_delete=models.CASCADE, related_name='ratings')
+    
+    def __str__(self):
+        return f'{self.rating} -> {self.post}'
+
+class Like(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes')
+    is_liked = models.BooleanField(default=False)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')
+
+
+    def __str__(self) -> str:
+        return f'Liked {self.post} by {self.author.name}'

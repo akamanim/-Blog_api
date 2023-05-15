@@ -1,4 +1,6 @@
-#!/home/hello/Desktop/py27ev/projects/blog_api/venv/bin/python3
+#!/bin/sh
+'''exec' "/home/mithat/Рабочий стол/allfiles/projects/blog_api_ayana/blog_api27/venv/bin/python3" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys
